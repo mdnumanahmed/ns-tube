@@ -24,7 +24,7 @@ const loadVideos = async () => {
 const displayVideos = (videos) => {
   const tubeContainer = document.getElementById("tube-container");
   tubeContainer.innerHTML = "";
-
+  videos.length ? toggleHidden(true) : toggleHidden();
   videos.forEach((video) => {
     const { thumbnail, authors, others, title } = video;
     const minutes = others.posted_date / 60;
@@ -62,6 +62,23 @@ const displayVideos = (videos) => {
        </div>
       `;
   });
+};
+
+const loadDataById = async (categoryId) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phero-tube/category/${categoryId}`
+  );
+  const data = await res.json();
+  console.log(data.category);
+  displayVideos(data.category);
+};
+
+const toggleHidden = (status) => {
+  if (status) {
+    document.getElementById("data-not-found").classList.add("hidden");
+  } else {
+    document.getElementById("data-not-found").classList.remove("hidden");
+  }
 };
 
 displayCategories();
