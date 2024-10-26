@@ -13,6 +13,45 @@
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
+    <header>
+      <div class="container mx-auto px-20 py-12">
+        <div class="navbar bg-base-100">
+          <div class="navbar-start">
+            <a class="btn btn-ghost text-xl">NS Tube</a>
+          </div>
+          <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+              <div class="form-control">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  class="input input-bordered w-24 md:w-auto"
+                />
+              </div>
+              <button class="btn btn-ghost btn-circle">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </ul>
+          </div>
+          <div class="navbar-end">
+            <a class="btn btn-error text-white">Sort By View</a>
+          </div>
+        </div>
+      </div>
+    </header>
     <script src="js/main.js"></script>
   </body>
 </html>
