@@ -14,8 +14,8 @@
   </head>
   <body>
     <header>
-      <div class="container mx-auto px-20 py-12">
-        <div class="navbar bg-base-100">
+      <div class="container mx-auto px-20 py-4">
+        <div class="navbar bg-base-100 border-b-2">
           <div class="navbar-start">
             <a class="btn btn-ghost text-xl">NS Tube</a>
           </div>
@@ -47,11 +47,16 @@
             </ul>
           </div>
           <div class="navbar-end">
-            <a class="btn btn-error text-white">Sort By View</a>
+            <a class="btn bg-[#FF1F3D] text-white">Sort By View</a>
           </div>
         </div>
       </div>
     </header>
+    <main class="container mx-auto px-20 py-4">
+      <div id="category-container" class="text-center space-x-6 py-5">
+        <button class="btn hover:text-white hover:bg-[#FF1F3D]">All</button>
+      </div>
+    </main>
     <script src="js/main.js"></script>
   </body>
 </html>
