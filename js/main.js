@@ -112,5 +112,19 @@ const sortByView = () => {
   displayVideos(sortedVideos);
 };
 
+document
+  .getElementById("search-input")
+  .addEventListener("keyup", async function (e) {
+    // const inputText = document.getElementById("search-input").value;
+    const inputText = e.target.value;
+    if (e.key === "Enter") {
+      const res = await fetch(
+        `https://openapi.programming-hero.com/api/phero-tube/videos?title=${inputText}`
+      );
+      const data = await res.json();
+      displayVideos(data.videos);
+    }
+  });
+
 displayCategories();
 loadVideos();
