@@ -12,13 +12,14 @@ const displayCategories = async () => {
   });
 };
 
+let allVideos = [];
 const loadVideos = async () => {
   const res = await fetch(
     "https://openapi.programming-hero.com/api/phero-tube/videos"
   );
   const data = await res.json();
-  const videos = data.videos;
-  displayVideos(videos);
+  allVideos = data.videos;
+  displayVideos(allVideos);
 };
 
 const displayVideos = (videos) => {
@@ -100,6 +101,16 @@ document
     }
     prevBtn = e.target;
   });
+
+const sortByView = () => {
+  const sortedVideos = allVideos.sort(function (a, b) {
+    // remove last alphabet from the view counts
+    a = a.others.views.slice(0, a.others.views.length - 1);
+    b = b.others.views.slice(0, b.others.views.length - 1);
+    return a - b;
+  });
+  displayVideos(sortedVideos);
+};
 
 displayCategories();
 loadVideos();
