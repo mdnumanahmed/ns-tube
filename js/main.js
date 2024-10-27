@@ -65,11 +65,14 @@ const displayVideos = (videos) => {
 };
 
 const loadDataById = async (categoryId) => {
+  // load all videos by clicking ALL button
+  if (!categoryId) {
+    loadVideos();
+  }
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phero-tube/category/${categoryId}`
   );
   const data = await res.json();
-  console.log(data.category);
   displayVideos(data.category);
 };
 
@@ -80,6 +83,23 @@ const toggleHidden = (status) => {
     document.getElementById("data-not-found").classList.remove("hidden");
   }
 };
+
+let prevBtn = null;
+// Added Active style
+document
+  .getElementById("category-container")
+  .addEventListener("click", function (e) {
+    // console.dir(e.target);
+    const isBtn = e.target.nodeName === "BUTTON";
+    if (!isBtn) {
+      return;
+    }
+    e.target.classList.add(`bg-[#FF1F3D]`);
+    if (prevBtn !== null) {
+      prevBtn.classList.remove(`bg-[#FF1F3D]`);
+    }
+    prevBtn = e.target;
+  });
 
 displayCategories();
 loadVideos();
