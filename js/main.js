@@ -1,3 +1,4 @@
+let firstBtn;
 const displayCategories = async () => {
   const categoryContainer = document.getElementById("category-container");
   const res = await fetch(
@@ -5,11 +6,16 @@ const displayCategories = async () => {
   );
   const data = await res.json();
   const categories = data.categories;
+  const allLoadCat = { category_id: "all", category: "All" };
+  categories.unshift(allLoadCat);
   categories.forEach((category) => {
     categoryContainer.innerHTML += `
       <button onclick="loadDataById('${category.category_id}')" class="btn hover:text-white hover:bg-[#FF1F3D]">${category.category}</button>
       `;
   });
+  // Active state added in initial loading
+  firstBtn = categoryContainer.children[0];
+  firstBtn.classList.add("bg-[#FF1F3D]", "text-white");
 };
 
 let allVideos = [];
@@ -67,9 +73,10 @@ const displayVideos = (videos) => {
 
 const loadDataById = async (categoryId) => {
   // load all videos by clicking ALL button
-  if (!categoryId) {
+  if (categoryId === "all") {
     loadVideos();
   }
+  firstBtn.classList.remove("bg-[#FF1F3D]", "text-white");
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phero-tube/category/${categoryId}`
   );
@@ -80,7 +87,9 @@ const loadDataById = async (categoryId) => {
 const toggleHidden = (status) => {
   if (status) {
     document.getElementById("data-not-found").classList.add("hidden");
+    document.getElementById("tube-container").classList.remove("hidden");
   } else {
+    document.getElementById("tube-container").classList.add("hidden");
     document.getElementById("data-not-found").classList.remove("hidden");
   }
 };
@@ -95,9 +104,9 @@ document
     if (!isBtn) {
       return;
     }
-    e.target.classList.add(`bg-[#FF1F3D]`);
+    e.target.classList.add("bg-[#FF1F3D]", "text-white");
     if (prevBtn !== null) {
-      prevBtn.classList.remove(`bg-[#FF1F3D]`);
+      prevBtn.classList.remove("bg-[#FF1F3D]", "text-white");
     }
     prevBtn = e.target;
   });
