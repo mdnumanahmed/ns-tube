@@ -132,6 +132,7 @@ document
       );
       const data = await res.json();
       displayVideos(data.videos);
+      prevBtn.classList.remove("bg-[#FF1F3D]", "text-white");
     }
   });
 
